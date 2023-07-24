@@ -11,6 +11,7 @@ from plugins import *
 
 
 def sigterm_handler_wrap(_signo):
+    # 使用下划线作为变量名的前缀是一种惯例，用于表示一个临时或不重要的变量。这种约定有助于代码的可读性，可以让读者知道该变量的值不会在后续的代码中使用到。（去掉不会影响代码的运行）
     old_handler = signal.getsignal(_signo)
 
     def func(_signo, _stack_frame):
@@ -27,7 +28,7 @@ def run():
     try:
         # load config
         load_config()
-        # ctrl + c
+        # ctrl + c 通过注册信号处理程序来捕获并处理用户可能会发送的中断信号（SIGINT）或终止信号（SIGTERM）  并在接收到这些信号时执行相应的操作。这样做的目的是让程序能够优雅地响应用户或操作系统的信号，并进行适当的处理和清理，以确保程序的正确终止。
         sigterm_handler_wrap(signal.SIGINT)
         # kill signal
         sigterm_handler_wrap(signal.SIGTERM)

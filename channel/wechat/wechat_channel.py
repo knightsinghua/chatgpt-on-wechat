@@ -25,6 +25,17 @@ from lib import itchat
 from lib.itchat.content import *
 from plugins import *
 
+@itchat.msg_register(FRIENDS)
+def add_friend(msg):
+    try:
+        logger.info("行！")
+        itchat.accept_friend(msg.user, 3, autoUpdate=True)
+        logger.info("xing行！")
+        msg.user.send('Nice to meet you!')
+        logger.info("xxxxxx行！")
+    except :
+        logger.info("不行！")
+
 
 @itchat.msg_register([TEXT, VOICE, PICTURE, NOTE])
 def handler_single_msg(msg):

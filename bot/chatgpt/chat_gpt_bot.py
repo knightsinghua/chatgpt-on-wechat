@@ -88,6 +88,7 @@ class ChatGPTBot(Bot, OpenAIImage):
             else:
                 reply = Reply(ReplyType.ERROR, reply_content["content"])
                 logger.debug("[CHATGPT] reply {} used 0 tokens.".format(reply_content))
+            print("if",reply)
             return reply
 
         elif context.type == ContextType.IMAGE_CREATE:
@@ -97,9 +98,11 @@ class ChatGPTBot(Bot, OpenAIImage):
                 reply = Reply(ReplyType.IMAGE_URL, retstring)
             else:
                 reply = Reply(ReplyType.ERROR, retstring)
+            print("elif",reply)
             return reply
         else:
             reply = Reply(ReplyType.ERROR, "Bot不支持处理{}类型的消息".format(context.type))
+            print("else",reply)
             return reply
 
     def reply_text(self, session: ChatGPTSession, api_key=None, retry_count=0) -> dict:
